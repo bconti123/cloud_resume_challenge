@@ -3,15 +3,17 @@ import json
 
 
 counter_table = boto3.resource('dynamodb').Table('site_visit_count')
-response = counter_table.update_item(
-    Key={'visitor_id': 'visitor_counter'},
-    UpdateExpression="ADD counter_value :inc"
-)
-
-item = counter_table.get_item(Key={'site': 'view_count'})
-count_views = item['Item']['counter_value']
 
 def lambda_handler(event, context):
+    response = counter_table.update_item(
+        Key={'visitor_id': 'visitor_counter'},
+        UpdateExpression="ADD counter_value :inc"
+    )
+
+
+    item = counter_table.get_item(Key={'site': 'view_count'})
+    count_views = item['Item']['counter_value']
+
     return {
         'statusCode': 200,
         'headers': {
