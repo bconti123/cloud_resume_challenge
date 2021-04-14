@@ -1,8 +1,8 @@
 # cloud_resume_challenge
 
 # Working process : 9 / 16
-Certification [x]
-HTML [x]
+Certification [ x ]
+HTML [ x ]
 CSS [x]
 Static S3 Website [x]
 HTTPS [x]
