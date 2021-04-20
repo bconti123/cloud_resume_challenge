@@ -1,32 +1,17 @@
-/*
-const countEl = 
-document.getElementById('count');
+// DynamoDB ----> Lambda ---- > API Gateway ----> JS
+const countEl = document.getElementById('count');
 
-updateVisitCount();
-
-function updateVisitCount() {
-
-    fetch('https://qomxeq0shi.execute-api.us-west-1.amazonaws.com/test')
-        .then(res => res.json())
-        .then(res => {
-            countEl.innerHTML = res.value;
-        });
+function UpdateCount() {
+    fetch('https://fc3srfr1df.execute-api.us-west-1.amazonaws.com/prod/count', {
+        mode: "no-cors",
+        method: 'GET' 
+        })
+        .then(response => response.json())
+        .then(
+            response => { countEl.innerHTML = response.value;
+            })
+        .catch(error => console.error(error))
 }
-*/
-/* XML HTTP Request
-var xhr = new XMLHttpRequest();
+UpdateCount();
 
-xhr.open('GET', 'https://qomxeq0shi.execute-api.us-west-1.amazonaws.com/test', true);
-
-xhr.onload = function () {
-    if (xhr.readyState === xhr.DONE) {
-        if (xhr.status === 200) {
-            document.getElementById("count").innerHTML = '&nbsp;&nbsp;' + xhr.responseText + ' views&nbsp;&nbsp;';
-
-        }
-    }
-};
-
-xhr.send(null);
-*/
-var count = 5;
+// setInterval(UpdateCount, 5000)

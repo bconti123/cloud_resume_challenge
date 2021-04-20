@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-// DynamoDB ----> Lambda ---- > API Gateway ----> This reactjs
+// DynamoDB ----> Lambda ---- > API Gateway ----> JS
 
-function UpdateVisitCount() {
-
-    fetch('https://qomxeq0shi.execute-api.us-west-1.amazonaws.com/prod/site_get_view_count', {
+function UpdateCount() {
+    
+    fetch('https://fc3srfr1df.execute-api.us-west-1.amazonaws.com/prod/count', {
         mode: "no-cors",
-        method: 'GET'
+        method: 'OPTION'
     })    
     .then(response => {
         if (
@@ -24,11 +24,7 @@ function UpdateVisitCount() {
         data => document.getElementById('count').innerText = 'foo')
     .catch(error => console.error(error))
 }
-UpdateVisitCount();
-
-
-
-
+UpdateCount();
 
 export default class Head extends Component {
     render() {

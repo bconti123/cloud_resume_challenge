@@ -6,7 +6,7 @@ from decimal import Decimal
 db = boto3.resource('dynamodb', region_name='us-west-1')
 table = db.Table('site_hit')
 
-# JSONEncoder - Make sure json.dumps works with the number
+# JSONEncoder - Make sure json.dumps works with the number.
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
