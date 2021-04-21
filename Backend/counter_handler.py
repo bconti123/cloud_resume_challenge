@@ -7,6 +7,8 @@ db = boto3.resource('dynamodb', region_name='us-west-1')
 table = db.Table('site_hit')
 
 # JSONEncoder - Make sure json.dumps works with the number.
+
+
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
@@ -22,21 +24,29 @@ def lambda_handler(event, context):
             'site': '/'
         },
         # SET VAL = 1
-        ExpressionAttributeValues={
-            ':val': 1
+        AttributeUpdates={
+            'view_count': {
+                'Value': 1,
+                'Action': 'ADD'
+            }
         },
-        # ADD 1 TO VIEW_COUNT
-        UpdateExpression="SET view_count = view_count + :val",
         ReturnValues="UPDATED_NEW"
     )
+
+    json_str = json.dumps(response, cls=DecimalEncoder)
+    html = "<h1>Hello World</h1>"
+    #resp_dict = json.loads(json_str)
+    item = table.get_item(Key={'site': '/'})
+    count_views = item['Item']['view_count']
 
     #RETURN IF STATUS CODE IS 200, Lambda respond that ADD 1 TO VIEW_COUNT
     return {
         'statusCode': 200,
-        'body': json.dumps(response, cls=DecimalEncoder),
+        'body': json.dumps(item['Item']['view_count'], indent=4, cls=DecimalEncoder),
         'headers': {
-            "Access-Control-Allow-Headers": "Content-Type",
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, OPTIONS, PUT',
+            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers',
+            'Access-Control-Allow-Methods': 'GET,OPTIONS',
+            'X-Requested-With': '*'
         }
     }

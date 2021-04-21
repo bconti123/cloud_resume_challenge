@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './App.css';
 import Aboutme from "./components/Aboutme.component";
 import Nav from "./components/Nav.component";
@@ -32,6 +33,7 @@ class App extends React.Component {
           <Exp /> 
         {/* CONTACT */}
           <Contact />
+        
       </div>
     );
   }
