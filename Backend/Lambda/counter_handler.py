@@ -7,14 +7,11 @@ db = boto3.resource('dynamodb', region_name='us-west-1')
 table = db.Table('site_hit')
 
 # JSONEncoder - Make sure json.dumps works with the number.
-
-
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
             return float(obj)
         return json.JSONEncoder.default(self, obj)
-
 
 def lambda_handler(event, context):
     # SET UPDATE ITEM
@@ -31,13 +28,10 @@ def lambda_handler(event, context):
             }
         },
         ReturnValues="UPDATED_NEW"
-    )
-
-    json_str = json.dumps(response, cls=DecimalEncoder)
-    html = "<h1>Hello World</h1>"
-    #resp_dict = json.loads(json_str)
+    )  
+    
+    # GET ITEM FROM 'site'
     item = table.get_item(Key={'site': '/'})
-    count_views = item['Item']['view_count']
 
     #RETURN IF STATUS CODE IS 200, Lambda respond that ADD 1 TO VIEW_COUNT
     return {
