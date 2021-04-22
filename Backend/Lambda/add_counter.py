@@ -2,13 +2,7 @@ import boto3
 import json
 from decimal import Decimal
 
-# connect to specific DynamoDB table in specific region
-db = boto3.resource('dynamodb', region_name='us-west-1')
-table = db.Table('site_hit')
-
 # JSONEncoder - Make sure json.dumps works with the number.
-
-
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
@@ -16,7 +10,12 @@ class DecimalEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def lambda_handler(event, context):
+def updateViewCounter():
+
+    # connect to specific DynamoDB table in specific region
+    db = boto3.resource('dynamodb', region_name='us-west-1')
+    table = db.Table('site_hit')  
+      
     # SET UPDATE ITEM
     response = table.update_item(
         # CONNECT TO PKey Name in specific ROW
@@ -32,7 +31,11 @@ def lambda_handler(event, context):
         },
         ReturnValues="UPDATED_NEW"
     )
-
+def getViewCounter(event, context):
+    updateViewCounter()
+    
+    db = boto3.resource('dynamodb', region_name='us-west-1')
+    table = db.Table('site_hit')
     # GET ITEM FROM 'site'
     response = table.get_item(Key={'site': '/'})
     item = response['Item']['view_count']
@@ -41,7 +44,6 @@ def lambda_handler(event, context):
 
     #using json.loads will turn your data into a python dictionary
     resp_dict = json.loads(json_str)
-    print(resp_dict)
 
     #RETURN IF STATUS CODE IS 200, Lambda respond that ADD 1 TO VIEW_COUNT
     return {
@@ -54,3 +56,7 @@ def lambda_handler(event, context):
             'X-Requested-With': '*'
         }
     }
+
+if __name__ == "__main__":
+    
+    getViewCounter()

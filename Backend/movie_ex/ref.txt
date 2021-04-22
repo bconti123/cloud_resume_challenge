@@ -1,1 +1,0 @@
-https://muhannad0.github.io/post/using-moto-to-mock-test-aws-a-dynamodb-example/
