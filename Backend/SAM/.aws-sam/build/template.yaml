@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Create DB!
+Resources:
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Site_Counter
+      AttributeDefinitions:
+      - AttributeName: URL
+        AttributeType: S
+      KeySchema:
+      - AttributeName: URL
+        KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  SiteCounterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SiteCounterFunction
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Policies:
+      - AmazonDynamoDBFullAccess
+      Events:
+        SiteGetCounter:
+          Type: Api
+          EndpointConfiguration: REGIONAL
+          Properties:
+            Path: /count
+            Method: get
+          StageName: prod
+          Cors:
+            AllowMethods: GET, OPTION
+            AllowHeaders: Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers
+            AllowOrigin: '*'
