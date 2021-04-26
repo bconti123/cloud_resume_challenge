@@ -6,7 +6,7 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: "Site_Counter"
+      TableName: "Site_ViewCount"
       AttributeDefinitions: 
         -
           AttributeName: "URL"
@@ -28,16 +28,20 @@ Resources:
       Policies:
       - AmazonDynamoDBFullAccess
       Events:
-        SiteGetCounter:
+        SiteGetViewCount:
           Type: Api
-          EndpointConfiguration: REGIONAL   # REGIONAL OR EDGE
           Properties:
+            RestApiId: !Ref ApiGatewayCount
             Path: /count
             Method: get
-          StageName: prod
-          Cors: 
-            AllowMethods: 'GET, OPTION'
-            AllowHeaders: 'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'
-            AllowOrigin: '*'
 
-
+  ApiGatewayCount:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: sitegetviewcount
+      StageName: PROD
+      EndpointConfiguration: Regional
+    Cors: 
+      AllowMethods: 'GET, OPTION'
+      AllowHeaders: 'Content-Type,X-Amz-Date,X-Amz-Security-Token,Authorization,X-Api-Key,X-Requested-With,Accept,Access-Control-Allow-Methods,Access-Control-Allow-Origin,Access-Control-Allow-Headers'
+      AllowOrigin: '*'
