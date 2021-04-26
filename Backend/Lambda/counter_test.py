@@ -13,11 +13,11 @@ class TestDynamoDB(unittest.TestCase):
         #First check if table already exists. If it already exists that mean we connected to real AWS env and not mock.
         try:
             dynamodb = boto3.resource("dynamodb")
-            dynamodb.meta.client.describe_table(TableName='site_hit')
+            dynamodb.meta.client.describe_table(TableName='Site_ViewCount')
         except botocore.exceptions.ClientError:
             pass
         else:
-            err = "{Table} should not exist.".format(Table='site_hit')
+            err = "{Table} should not exist.".format(Table='Site_ViewCount')
             raise EnvironmentError(err)
 
         table_name = 'site_hit'
