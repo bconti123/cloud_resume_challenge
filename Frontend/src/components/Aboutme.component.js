@@ -26,11 +26,7 @@ export default class Aboutme extends Component {
                              I attend meeting with president, vice president, and board members
                     to discuss more about website improvement and add creative ideas to keep website updated and meet the requirement ultizing aglie development as planning, strategy, and communication.</p>
 
-                             <ul class="about-us-list">
-                               <li class="points">Currently study cloud computing (AWS, Google Cloud, and Microsoft Azure).</li>
-                               <li class="points">Never scared of taking big challenge. </li>
-                               <li class="points">Making mistake is okay, to keep continue and work hard!</li>
-                             </ul>
+
                            </div>
                          </div>
                        </div>

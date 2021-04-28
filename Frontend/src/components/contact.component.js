@@ -64,7 +64,7 @@ export default class Contact extends Component {
 
                 </div>
                 <div class="container">
-                    <div class="footer_bottom"><span>© 2020 Bryant Conti, Template by <a href="http://webthemez.com">WebThemez.com</a>. </span> </div>
+                    <div class="footer_bottom"><span>© 2020 Bryant Conti </span> </div>
                 </div>
             </footer> 
         )

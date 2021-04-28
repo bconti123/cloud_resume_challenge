@@ -20,6 +20,7 @@ export default class Nav extends Component {
                                     {/* <li><a href="#Portfolio" class="scroll-link">Portfolio</a></li> */}
                                     <li><a href="#experience" class="scroll-link">Experience</a></li>
                                     <li><a href="#contact" class="scroll-link">Contact</a></li>
+                                    <li><a href="https://bconti123.github.io/">Blog</a></li>
                                 </ul>
                             </div>
                         </nav>

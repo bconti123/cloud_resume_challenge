@@ -15,8 +15,8 @@ export default class Head extends Component {
         axios({
             method: 'get',
             mode: 'no-cors',
-            //url: 'https://1bwhrmga8d.execute-api.us-west-1.amazonaws.com/count/prod'
-            url: 'https://et3wb2n1el.execute-api.us-west-1.amazonaws.com/Prod/count'
+            url: 'https://1bwhrmga8d.execute-api.us-west-1.amazonaws.com/count/prod'
+            //url: 'https://et3wb2n1el.execute-api.us-west-1.amazonaws.com/Prod/count'
             })
             .then(response => {
                 this.setState({ item: response.data })
