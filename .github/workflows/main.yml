@@ -29,3 +29,9 @@ jobs:
       - name: Install Boto
         run: |
           pip install boto3
+      - name: AWS Configure for AKey and Skey reference
+        use: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_A_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_A_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
