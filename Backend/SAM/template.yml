@@ -6,8 +6,8 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      #TableName: "Site_ViewCount"
-      TableName: "site_hit"
+      TableName: "Site_ViewCount"
+      #TableName: "site_hit"
       AttributeDefinitions: 
         -
           AttributeName: "URL"
