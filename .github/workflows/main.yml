@@ -41,7 +41,7 @@ jobs:
       - name: Use tests with unit test in py
         run: |
           ls
-          cd backend
+          cd Backend
           cd Lambda/
           python counter_test.py
           cd ..
