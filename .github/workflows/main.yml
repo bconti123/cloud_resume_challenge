@@ -51,12 +51,6 @@ jobs:
           ls
           cd SAM/
       - name: SAM Build Setting 
-        uses: youyo/aws-sam-action/python3.8@v2
-        with:
-          sam_command: |
-          'build --use-container'
-          'deploy'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-west-1
+          run: |
+            sam build --use-container
+            sam deploy
