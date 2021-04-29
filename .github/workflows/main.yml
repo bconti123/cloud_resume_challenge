@@ -49,5 +49,5 @@ jobs:
           cd Lambda/
           ls
           python counter_test.py
-          cd .
+          cd ..
           ls
