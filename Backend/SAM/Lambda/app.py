@@ -4,7 +4,7 @@ from decimal import Decimal
 
 # connect to specific DynamoDB table in specific region
 db = boto3.resource('dynamodb', region_name='us-west-1')
-table = db.Table('Site_ViewCount')
+table = db.Table('site_hit')
 
 # JSONEncoder - Make sure json.dumps works with the number.
 class DecimalEncoder(json.JSONEncoder):

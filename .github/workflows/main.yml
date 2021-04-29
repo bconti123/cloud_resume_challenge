@@ -19,6 +19,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: aws-actions/setup-sam@v1
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -47,9 +48,10 @@ jobs:
           cd Lambda/
           ls
           python counter_test.py
-          cd ..
-          ls
-          cd SAM/
-      - name: check ls again
+      - name: SAM Build
         run: |
           ls
+          cd Backend
+          cd SAM/
+          sam build --use-container
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
