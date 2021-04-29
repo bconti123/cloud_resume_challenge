@@ -28,4 +28,4 @@ jobs:
           python -m pip install --upgrade pip
       - name: Install Boto
         run: |
-        pip install boto3
+          pip install boto3
