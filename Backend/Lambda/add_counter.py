@@ -14,7 +14,7 @@ def updateViewCounter():
 
     # connect to specific DynamoDB table in specific region
     db = boto3.resource('dynamodb', region_name='us-west-1')
-    table = db.Table('Site_ViewCount')
+    table = db.Table('site_hit')
       
     # SET UPDATE ITEM
     response = table.update_item(
@@ -35,7 +35,7 @@ def getViewCounter(event, context):
     updateViewCounter()
     
     db = boto3.resource('dynamodb', region_name='us-west-1')
-    table = db.Table('Site_ViewCount')
+    table = db.Table('site_hit')
     # GET ITEM FROM 'site'
     response = table.get_item(Key={'site': '/'})
     item = response['Item']['view_count']
