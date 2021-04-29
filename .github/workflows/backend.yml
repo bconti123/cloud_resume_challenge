@@ -7,37 +7,37 @@ jobs:
     matrix:
       python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
   steps:
-      uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+    uses: actions/checkout@v2
+  - name: Set up Python ${{ matrix.python-version }}
+    uses: actions/setup-python@v2
+    with:
+      python-version: ${{ matrix.python-version }}
 
-      name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-      name: Install Boto
-      run: |
-        pip install boto3
-      name: AWS Configure for AKey and Skey reference
-      use: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_A_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_A_SECRET_ACCESS_KEY }}
-        aws-region: us-west-1
-        name: Use tests with unit test in py
-      run: |
-        ls
-        cd Backend
-        cd Lambda/
-        python counter_test.py
-        cd ..
-        ls
-      name: SAM Build Setting 
-      use: youyo/aws-sam-action/python3.8/master
-      with:
-        sam_command: 'deploy --stack-name pyth38-test --no-fail-on-empty-changeset --resolve-s3 --capabilities CAPABILITY_NAMED_IAM'
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: us-west-1
+    name: Install Dependencies
+    run: |
+      python -m pip install --upgrade pip
+    name: Install Boto
+    run: |
+      pip install boto3
+    name: AWS Configure for AKey and Skey reference
+    use: aws-actions/configure-aws-credentials@v1
+    with:
+      aws-access-key-id: ${{ secrets.AWS_A_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_A_SECRET_ACCESS_KEY }}
+      aws-region: us-west-1
+      name: Use tests with unit test in py
+    run: |
+      ls
+      cd Backend
+      cd Lambda/
+      python counter_test.py
+      cd ..
+      ls
+    name: SAM Build Setting 
+    use: youyo/aws-sam-action/python3.8/master
+    with:
+      sam_command: 'deploy --stack-name pyth38-test --no-fail-on-empty-changeset --resolve-s3 --capabilities CAPABILITY_NAMED_IAM'
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: us-west-1
