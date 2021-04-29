@@ -50,7 +50,7 @@ jobs:
           ls
           python counter_test.py
           cd .
-          Ls
+          ls
           cd SAM/
         - name: SAM Build Setting 
         uses: youyo/aws-sam-action/python3.8/master
