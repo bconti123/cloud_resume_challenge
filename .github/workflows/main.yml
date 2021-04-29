@@ -51,6 +51,6 @@ jobs:
           ls
           cd SAM/
       - name: SAM Build Setting 
-          run: |
-            sam build --use-container
-            sam deploy
+        run: |
+          sam build --use-container
+          sam deploy
