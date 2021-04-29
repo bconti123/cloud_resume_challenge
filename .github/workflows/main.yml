@@ -37,3 +37,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           # aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # if you have/need it
           aws-region: us-west-1
+
+      - name: Use tests with unit test in py
+        run: |
+          ls
+          cd backend
+          cd Lambda/
+          python counter_test.py
+          cd ..
+          Ls
