@@ -43,6 +43,7 @@ jobs:
           ls
           cd Backend
           cd Lambda/
+          ls
           python counter_test.py
           cd ..
           Ls
