@@ -17,7 +17,7 @@ on: [push]
           python -m pip install --upgrade pip
       - name: Install Boto
         run: |
-        pip install boto3
+          pip install boto3
       - name: AWS Configure for AKey and Skey reference
         use: aws-actions/configure-aws-credentials@v1
         with:
@@ -31,7 +31,7 @@ on: [push]
           cd Lambda/
           python counter_test.py
           cd ..
-          Ls
+          ls
       - name: SAM Build Setting 
         use: youyo/aws-sam-action/python3.8/master
         with:
